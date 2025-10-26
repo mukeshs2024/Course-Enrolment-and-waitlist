@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Enroll Student</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-top: 20px; border: 1px solid #ccc; padding: 10px; width: 50%; }
+        div { margin-bottom: 10px; }
+        label { display: inline-block; width: 150px; }
+        select { width: 250px; }
+    </style>
+</head>
+<body>
+
+    <h1 th:text="'Enroll ' + ${student.name} + ' in a Course'">Enroll Student in a Course</h1>
+
+    <form th:action="@{/enroll}" method="POST">
+    
+        <input type="hidden" name="studentId" th:value="${student.studentId}" />
+        
+        <div>
+            <label>Select a Course:</label>
+            <select name="courseId">
+                <option value="">-- Please select a course --</option>
+                <option th:each="course : ${allCourses}"
+                        th:value="${course.courseId}"
+                        th:text="${course.name + ' (Capacity: ' + course.maxCapacity + ')'}">
+                    Course Name
+                </option>
+            </select>
+        </div>
+        
+        <div>
+            <button type="submit">Enroll</button>
+        </div>
+    </form>
+    
+    <hr>
+    <a th:href="@{/student/{id}(id=${student.studentId})}">Cancel</a>
+
+</body>
+</html>

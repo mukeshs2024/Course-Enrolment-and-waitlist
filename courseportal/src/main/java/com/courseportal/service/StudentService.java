@@ -21,4 +21,11 @@ public class StudentService {
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
+    
+    // ----- THIS IS THE NEW METHOD YOU ADDED -----
+    public Student getStudentById(Integer studentId) {
+        return studentRepository.findById(studentId)
+            .orElseThrow(() -> new RuntimeException("Student not found with id: " + studentId));
+    }
+    // ---------------------------------------------
 }
