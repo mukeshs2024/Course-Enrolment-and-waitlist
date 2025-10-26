@@ -18,7 +18,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Integer>
     long findByCourseCourseIdAndStatus(Integer courseId, String status);
 
     // Counts enrollments for a course that match a specific status (e.g., "Enrolled")
-    List<Enrollment> countByCourseCourseIdAndStatus(Integer courseId, String status);
+    long countByCourseCourseIdAndStatus(Integer courseId, String status);
 
-	List<Enrollment> findByCourseCourseId1(Integer courseId);
+	
 }

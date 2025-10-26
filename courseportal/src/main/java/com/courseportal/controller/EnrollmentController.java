@@ -31,7 +31,7 @@ public class EnrollmentController {
 
     // This matches the '/api/waitlist/course/{id}' endpoint from your diagram
     @GetMapping("/waitlist/course/{id}")
-    public List<Enrollment> getWaitlistedStudents(@PathVariable("id") Integer courseId) {
+    public long getWaitlistedStudents(@PathVariable("id") Integer courseId) {
         return enrollmentService.getWaitlistedStudentsForCourse(courseId);
     }
 }

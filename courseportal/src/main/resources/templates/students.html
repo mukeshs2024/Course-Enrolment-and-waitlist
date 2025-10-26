@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Students</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 50%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        form { margin-top: 20px; border: 1px solid #ccc; padding: 10px; width: 50%; }
+        div { margin-bottom: 10px; }
+        label { display: inline-block; width: 100px; }
+        input { width: 250px; }
+    </style>
+</head>
+<body>
+
+    <h1>Student List</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${allStudents}">
+                <td th:text="${student.studentId}">1</td>
+                <td th:text="${student.name}">Alice Smith</td>
+                <td th:text="${student.email}">alice@example.com</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Add a New Student</h2>
+    <form th:action="@{/students/add}" th:object="${newStudent}" method="POST">
+        <div>
+            <label>Name:</label>
+            <input type="text" th:field="*{name}" />
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="text" th:field="*{email}" />
+        </div>
+        <div>
+            <label>Contact No:</label>
+            <input type="text" th:field="*{contactNo}" />
+        </div>
+        <div>
+            <button type="submit">Save Student</button>
+        </div>
+    </form>
+    
+    <hr>
+    <a th:href="@{/}">Back to Home</a>
+
+</body>
+</html>

@@ -33,8 +33,9 @@ public class EnrollmentService {
             .orElseThrow(() -> new RuntimeException("Course not found with id: " + courseId));
 
         // FIX 2: Use 'countBy...' method to get a number (long), not 'findBy...'.
-        long currentEnrollmentCount = enrollmentRepository.findByCourseCourseIdAndStatus(courseId, "Enrolled");
-
+     // This is CORRECT
+     // This is CORRECT
+        long currentEnrollmentCount = enrollmentRepository.countByCourseCourseIdAndStatus(courseId, "Enrolled");
         Enrollment newEnrollment = new Enrollment();
         newEnrollment.setStudent(student);
         newEnrollment.setCourse(course); // FIX 3: Pass the correct 'Course' object.
@@ -59,7 +60,10 @@ public class EnrollmentService {
     }
 
     // This method gets the actual waitlisted student records.
-    public List<Enrollment> getWaitlistedStudentsForCourse(Integer courseId) {
-        return enrollmentRepository.countByCourseCourseIdAndStatus(courseId, "Waitlisted");
+ // This method gets the actual waitlisted student records.
+    public long getWaitlistedStudentsForCourse(Integer courseId) {
+
+        // CORRECT: Use 'findBy...' to return the list of waitlisted enrollments
+        return enrollmentRepository.findByCourseCourseIdAndStatus(courseId, "Waitlisted");
     }
 }
